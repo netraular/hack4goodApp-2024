@@ -1,6 +1,7 @@
 """_summary_
 """
 
+import sys
 import segno
 import cv2
 
@@ -8,9 +9,9 @@ import cv2
 def qr_generate():
     """_summary_
     """
-    qrcode = segno.make_qr(f"hack4good.duckdns.org/product?={ids[0]}")
-    qrcode.save("basic_qr.png", scale=10)
-    print("Hello World!")
+    qrcode = segno.make_qr(f"hack4good.duckdns.org/product?={sys.argv[1]}")
+    qrcode.save(f"qr/qr_{sys.argv[1]}.png", scale=10)
+    print(sys.argv[1])
     
     
     
@@ -30,6 +31,7 @@ def main():
     """
     # qr_read()
     qr_generate()
+    return ("A")
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ use App\Http\Controllers\QRController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -31,3 +31,4 @@ Route::get('/qrscan', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/product', [App\Http\Controllers\QRController::class, 'showProduct'])->name('product');
 Route::get('/createData', [App\Http\Controllers\QRController::class, 'createData'])->name('createData');
+Route::get('/createqr', [App\Http\Controllers\QRController::class, 'createQr'])->name('createqr');
