@@ -62,7 +62,7 @@
 			</div>
 			<img src="{{ asset('/images/score.png') }}" alt="" style="width:200px; display: block; margin: auto">
 			<div class="map">
-
+				<img src="{{asset('/images/map.jpeg')}}" alt="" style="width:300px; display: block; margin: auto">
 			</div>
 			@if(isset($qr->end) && !$qr->end == 1)
 			<br>
