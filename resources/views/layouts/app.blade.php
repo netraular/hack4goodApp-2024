@@ -60,6 +60,9 @@
           <li class="nav-item">
             <a class="nav-link active" href="/empresas">Empresas</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/viewqr?id=70">Ejemplo producto final</a>
+          </li>
         </ul>
       </div>
     </div>
