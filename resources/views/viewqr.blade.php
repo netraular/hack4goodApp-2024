@@ -27,6 +27,7 @@
 						Descripcion: {{ $product->description }}
 					</div>
 				</div>
+				@if(isset($qr->end) && $qr->end == 1)
 				<div class="">
 					<br><br>
 					<div class="" style="font-size:20px">
@@ -40,8 +41,10 @@
 					@endforeach
 					<div class="" style="font-family: 'Madimi One', sans-serif; font-weight:400; font-style: normal; font-size: 15px;"> Tus manos !</div>
 				</div>
+				@endif
             </div>
 			<br>
+			@if(isset($qr->end) && $qr->end == 1)
 			<div class="" style="display:flex">
 				<div class="co2" style="flex:1">
 					<div class="dist-title">
@@ -64,6 +67,7 @@
 			<div class="map">
 				<img src="{{asset('/images/map.jpeg')}}" alt="" style="width:300px; display: block; margin: auto">
 			</div>
+			@endif
 			@if(isset($qr->end) && !$qr->end == 1)
 			<br>
 				<div class="">
