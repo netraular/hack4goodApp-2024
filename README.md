@@ -1,3 +1,36 @@
+# 🚀 El Reto
+
+## 🔬 Introducción al Problema
+
+## 🤯Planteo de Ideas
+
+## 🏃‍♀️Steps
+
+## 🎁 MVP
+
+## 💣 Inconvenientes
+
+## 🐻 Conclusión
+
+### 🚀 El reto:
+Generar una webApp que proporcione información de la huella de CO2 que tiene un producto X.
+
+### 🔬 Introducción al Problema:
+
+### 🤯Planteo de Ideas
+
+## 🏃‍♀️ Steps
+
+## 🎁 MVP
+
+[MVP Demo]()
+
+### 💣 Inconvenientes
+
+## 🐻 Conclusión
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
