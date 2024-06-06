@@ -1,4 +1,5 @@
 # 🚀 El Reto
+Generar una webApp que proporcione información de la huella de CO2 que tiene un producto X.
 
 ## 🔬 Introducción al Problema
 
@@ -9,23 +10,6 @@
 ## 🎁 MVP
 
 ## 💣 Inconvenientes
-
-## 🐻 Conclusión
-
-### 🚀 El reto:
-Generar una webApp que proporcione información de la huella de CO2 que tiene un producto X.
-
-### 🔬 Introducción al Problema:
-
-### 🤯Planteo de Ideas
-
-## 🏃‍♀️ Steps
-
-## 🎁 MVP
-
-[MVP Demo]()
-
-### 💣 Inconvenientes
 
 ## 🐻 Conclusión
 
