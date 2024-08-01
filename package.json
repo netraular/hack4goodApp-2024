@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "bootstrap-icons": "^1.11.3",
-        "watch": "^1.0.2"
+        "qr-scanner": "^1.4.2",
+        "watch": "^0.13.0"
     }
 }

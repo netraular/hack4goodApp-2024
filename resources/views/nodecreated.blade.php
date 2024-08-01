@@ -12,7 +12,7 @@
 			<script>
 				document.getElementById("redirect").addEventListener("click", redirect);
 				function redirect(){
-					window.location = 'https://eco2.duckdns.org/';
+					window.location = 'https://eco2.netshiba.com/';
 				}
 			</script>
         </div>

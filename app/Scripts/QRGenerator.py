@@ -9,7 +9,7 @@ import cv2
 def qr_generate():
     """_summary_
     """
-    qrcode = segno.make_qr(f"https://eco2.duckdns.org/viewqr?id={sys.argv[1]}")
+    qrcode = segno.make_qr(f"https://eco2.netshiba.com/viewqr?id={sys.argv[1]}")
     qrcode.save(f"qr/qr_{sys.argv[1]}.png", scale=10)
     print(sys.argv[1])
     
