@@ -44,7 +44,7 @@
                 <a class="nav-link active" href="/empresas">Empresas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/viewqr?id=126">Ejemplo producto final</a>
+                <a class="nav-link active" href="/viewqr?id=1">Ejemplo producto final</a>
               </li>
             </ul>
           </div>

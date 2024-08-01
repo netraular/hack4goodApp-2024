@@ -27,7 +27,7 @@
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
       <img src="{{URL::asset('/images/add product.png')}}" width="140" height="140" style="border-radius: 70px">
-        <h2 class="fw-normal">Subir productos</h2>
+        <h2 class="fw-normal">Controlar productos</h2>
         <p>Añade tus productos a la web para poder empezar a crear códigos de seguimiento.</p>
         <p><a class="btn btn-secondary" href="/createproduct">Añadir producto &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
