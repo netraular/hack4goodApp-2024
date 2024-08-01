@@ -17,14 +17,13 @@
       <img src="{{URL::asset('/images/transporte.png')}}" width="140" height="140" style="border-radius: 70px">
         <h2 class="fw-normal">Añadir paradas</h2>
         <p>Escanea el qr de tu producto y añade un nuevo punto en el trayecto.</p>
-        <!-- <style>
-          input[type="file"] {
-            display: none;
-          }
-        </style>
-        <form>
-          <label lass="btn btn-secondary"> <input type="file"/> <a class="btn btn-secondary" onclick=Sendform();>Escanear QR  &raquo;</a> </label>
-        </form> -->
+        <form action="{{ route('scan.qr') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="qr_image" class="btn btn-primary">Escanear Producto</label>
+                <input type="file" class="form-control" id="qr_image" name="qr_image" style="display: none;" onchange="this.form.submit()">
+            </div>
+        </form>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
       <img src="{{URL::asset('/images/add product.png')}}" width="140" height="140" style="border-radius: 70px">

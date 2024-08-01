@@ -1,3 +1,98 @@
+<style>
+      input {
+        border: 2px solid gray;
+        outline:none;
+        border-radius: 6px;
+      }
+
+      textarea {
+        border: 2px solid gray;
+        outline:none;
+        border-radius: 6px;
+        resize: none;
+      }
+      
+      .product-name-input-label {
+        position: absolute;
+        background-color: white;
+        color: gray;
+        left: 4px;
+        transition: all 0.2s ease-in;
+        cursor: pointer;
+      }
+
+      .product-brand-input-label {
+        position: absolute;
+        background-color: white;
+        color: gray;
+        left: 4px;
+        transition: all 0.2s ease-in;
+        cursor: pointer;
+      }
+
+      .product-description-input-label {
+        position: absolute;
+        background-color: white;
+        color: gray;
+        left: 6px;
+        top: 10px;
+        transition: all 0.2s ease-in;
+        cursor: pointer;
+      }
+
+      input:is(:focus, :valid) {
+        border: 2px solid black;
+      }
+
+      input:is(:focus, :valid) + .product-name-input-label {
+        transform: translatey(calc(-1 * (0px) - 12px));
+        font-size: 9px;
+        color: black;
+      }
+
+      input:is(:focus, :valid) + .product-brand-input-label {
+        transform: translatey(calc(-1 * (0px) - 12px));
+        font-size: 9px;
+        color: black;
+      }
+
+      textarea:is(:focus, :valid) + .product-description-input-label {
+        transform: translatey(calc(-1 * (0px) - 15px));
+        font-size: 9px;
+        color: black;
+      }
+
+      .inputCategory {
+        width: 100%;
+        height: 1.75rem;
+        color: gray;
+        background: white;
+        border: 2px solid gray;
+        outline:none;
+        border-radius: 6px;
+      }
+
+      #inputCategory.valid {
+        border: 2px solid black;
+        color: black;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .product-img-input-btn {
+      }
+
+      .product-img-input-icon {
+        height: 1.75rem;
+      }
+      
+      .product-img-input {
+        
+      }
+    </style>
+
 @extends('layouts.app')
 @section('content') 
 <div class="container marketing">

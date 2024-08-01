@@ -42,3 +42,4 @@ Route::get('/createproduct', [App\Http\Controllers\QRController::class, 'createP
 Route::post('/createproductaction', [App\Http\Controllers\QRController::class, 'createProduct'])->name('createproductaction');
 Route::get('/addnode', [App\Http\Controllers\QRController::class, 'addNode'])->name('addnode');
 Route::get('/nodecreated', [App\Http\Controllers\QRController::class, 'nodeCreated'])->name('nodecreated');
+Route::get('/buscar-qr', [QrController::class, 'buscar'])->name('buscar.qr');

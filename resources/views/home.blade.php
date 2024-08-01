@@ -23,12 +23,12 @@
             <img src="{{URL::asset('/images/buscador.png')}}" width="140" height="140" style="border-radius: 70px">
             <h2 class="fw-normal">Busca</h2>
             <p>Encuentra un listado de productos sostenibles cerca de tu zona.</p>
-            <p><a class="btn btn-secondary" href="#">Ir al buscador &raquo;</a></p>
+            <p><a href="{{ route('buscar.qr') }}" class="btn btn-primary">Buscar</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img src="{{URL::asset('/images/comparador.jpg')}}" width="140" height="140" style="border-radius: 70px">
             <h2 class="fw-normal">Compara</h2>
-            <p>Decide que productos comprar con nuestro comparador y guarda tus favoritos.</p>
+            <p>Compara entre cientos de productos y guarda tus favoritos.</p>
             <p><a class="btn btn-secondary" href="#">Ir al comparador &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
@@ -39,7 +39,5 @@
     <img class="text-center" src="{{URL::asset('/images/particular 5.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;">
 
 </div>
-
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
 @endsection
