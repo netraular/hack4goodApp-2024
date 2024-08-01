@@ -5,7 +5,7 @@
     Crea el seguimiento de un producto
   </h1>
   <br>
-  <table class="table table-striped">
+  <table class="table table-striped" id="manage-qrs-table">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -14,14 +14,15 @@
         <th scope="col">Categoría</th>
         <th scope="col">Marca</th>
         <th scope="col">Descripción</th>
-        <th scope="col" colspan="2">Acciones</th>
+        <th scope="col" >Editar</th>
+        <th scope="col" >Generar QR</th>
       </tr>
     </thead>
     <tbody>
       @foreach($products as $product)
       <tr>
         <td>{{$product->id}}</td>
-        <td><img src="{{ asset($product->pic) }}" alt="" style="width:50%;max-width: 50px;"></td>
+        <td> <img src="{{ asset($product->pic) }}" alt=""  style="max-width: 100px; max-height: 100px;"> </td>
         <td>{{$product->name}}</td>
         <td>{{$product->category}}</td>
         <td>{{$product->marca}}</td>
@@ -43,6 +44,7 @@
     </tbody>
   </table>
 
+  <!-- Modal para mostrar todos los QR de un producto -->
   @foreach($products as $product)
   <div class="modal fade" id="qrModal{{$product->id}}" tabindex="-1" aria-labelledby="qrModalLabel{{$product->id}}" aria-hidden="true">
     <div class="modal-dialog">
@@ -83,7 +85,7 @@
   </div>
   @endforeach
 
-  <!-- Modal para mostrar el QR y el botón de guardar -->
+  <!-- Modal para generar QR de un producto -->
   <div class="modal fade" id="qrCodeModal" tabindex="-1" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -92,7 +94,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
-          <img id='qr' src="{{ isset($qrImage) ? asset('qr/qr_'.$qrImage.'.png') : '' }}" class="center">
+          <img id='qr' src="{{ isset($qrImage) ? asset('qr/qr_'.$qrImage.'.png') : '' }}" class="center" >
           <div>
             <button onclick="saveImage()" class="btn btn-primary" style="margin:auto;display:block;">Guardar QR</button>
           </div>
@@ -120,4 +122,12 @@
   </script>
   @endif
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#manage-qrs-table').DataTable();
+    });
+</script>
 @endsection
