@@ -46,30 +46,36 @@ class QRController extends Controller
         return view('createproduct');
     }
 
+    public function viewQrs(Request $request) {
+        $products = Product::all();
+        $qrs = Qr::all(); // Obtener todos los registros de Qr
+        $qrImage = $request->query('qrImage'); // Obtener el ID del QR desde la consulta
+        
+        return view('createqr', compact('products', 'qrs', 'qrImage'));
+    }
+
     public function createQr(Request $request) {
-        $products=Product::all();
+        $products = Product::all();
+        $qrs = Qr::all(); // Obtener todos los registros de Qr
 
-        if (isset($request->id))
-        {
-
+        if ($request->has('id')) {
             $id = $request->id;
             $qr = new Qr;
             $qr->product_id = $id;
             $qr->end = FALSE;
-            // dd($qr);
             $qr->save();
-            $process = new Process(['python3', app_path(). "/Scripts/QRGenerator.py", $qr->id]);
+
+            $process = new Process(['python3', app_path() . "/Scripts/QRGenerator.py", $qr->id]);
             $process->run();
 
             if (!$process->isSuccessful()) {
                 throw new ProcessFailedException($process);
             }
-            $output_data = $process->getOutput();
-            $ret = $qr->id;
-            return view('createqr', compact('ret','products'));
-        }
-        else {
-            return view('createqr',compact('products'));
+
+            // Redirige a /viewqrs con el ID del QR como parámetro
+            return redirect()->route('viewqrs', ['qrImage' => $qr->id]);
+        } else {
+            return redirect()->route('viewqrs');
         }
     }
 

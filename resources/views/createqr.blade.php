@@ -3,10 +3,10 @@
 <div class="container marketing">
   <h1>
     Crea el seguimiento de un producto
-</h1>
+  </h1>
   <br>
   <table class="table table-striped">
-    <thead >
+    <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Imagen</th>
@@ -14,46 +14,110 @@
         <th scope="col">Categoría</th>
         <th scope="col">Marca</th>
         <th scope="col">Descripción</th>
-        <th scope="col">Generar QR</th>
+        <th scope="col" colspan="2">Acciones</th>
       </tr>
     </thead>
     <tbody>
       @foreach($products as $product)
       <tr>
         <td>{{$product->id}}</td>
-        <td>							<img src="{{ asset($product->pic) }}" alt="" style="width:50%;max-width: 50px;"></td>
+        <td><img src="{{ asset($product->pic) }}" alt="" style="width:50%;max-width: 50px;"></td>
         <td>{{$product->name}}</td>
         <td>{{$product->category}}</td>
         <td>{{$product->marca}}</td>
         <td>{{$product->description}}</td>
-        <td class="fs-4 mb-3" ><a href="/createqr?id={{$product->id}}"style="color:green" class="bi bi-plus-square"></a></td>
+        <td>
+          @if($qrs->where('product_id', $product->id)->count() > 0)
+            <button type="button" class="btn btn-link bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#qrModal{{$product->id}}" style="color:light-blue;"></button>
+          @endif
+        </td>
+        <td>
+          <form action="{{ route('createqr') }}" method="POST" style="display:inline;">
+            @csrf
+            <input type="hidden" name="id" value="{{ $product->id }}">
+            <button type="submit" class="btn btn-link bi bi-plus-square" style="color:green;"></button>
+          </form>
+        </td>
       </tr>
       @endforeach
     </tbody>
   </table>
-  <!-- <form action="/createqr" method='get'>
-    <label for="fname">Numero del producto:</label><br>
-    <input type="number" id="product_id" name="id" required><br>
-    <br>
-    <input type="submit" value="Generar QR">
-  </form>  -->
 
-  @if(isset($ret))
-  <br><br>
-    <img id='qr' src="{{ asset('qr/qr_'.$ret.'.png' ) }}"  class="center" >
-    <div class="" >
-      <button onclick="saveImage()" style="margin:auto;display:block;">Guardar QR</button>
+  @foreach($products as $product)
+  <div class="modal fade" id="qrModal{{$product->id}}" tabindex="-1" aria-labelledby="qrModalLabel{{$product->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qrModalLabel{{$product->id}}">QRs para {{$product->name}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">End</th>
+                <th scope="col">Distancia</th>
+                <th scope="col">Puntuación</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($qrs as $qr)
+                @if($qr->product_id == $product->id)
+                  <tr>
+                    <td>{{$qr->id}}</td>
+                    <td>{{$qr->end ? '1' : '0'}}</td>
+                    <td>{{$qr->end ? $qr->distancia : '-'}}</td>
+                    <td>{{$qr->end ? $qr->puntuacion : '-'}}</td>
+                  </tr>
+                @endif
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
-    <script>
-      function saveImage(){
-        var imgElement = document.getElementById('qr');
-        var link = document.createElement('a');
-        link.href = imgElement.src;
-        link.download = 'qr.jpg';
-        link.click();
-      }
-    </script>
-  @endif
+  </div>
+  @endforeach
 
+  <!-- Modal para mostrar el QR y el botón de guardar -->
+  <div class="modal fade" id="qrCodeModal" tabindex="-1" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qrCodeModalLabel">QR Generado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id='qr' src="{{ isset($qrImage) ? asset('qr/qr_'.$qrImage.'.png') : '' }}" class="center">
+          <div>
+            <button onclick="saveImage()" class="btn btn-primary" style="margin:auto;display:block;">Guardar QR</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if(isset($qrImage))
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      $('#qrCodeModal').modal('show');
+    });
+
+    function saveImage() {
+      var imgElement = document.getElementById('qr');
+      var link = document.createElement('a');
+      link.href = imgElement.src;
+      link.download = 'qr.jpg';
+      link.click();
+    }
+  </script>
+  @endif
 </div>
 @endsection

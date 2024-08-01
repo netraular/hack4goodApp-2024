@@ -36,8 +36,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/product', [App\Http\Controllers\QRController::class, 'showProduct'])->name('product');
 Route::get('/viewqr', [App\Http\Controllers\QRController::class, 'viewQr'])->name('viewqr');
 Route::post('/scan-qr', [App\Http\Controllers\QRController::class, 'scanQR'])->name('scan.qr');
-// Route::get('/createData', [App\Http\Controllers\QRController::class, 'createData'])->name('createData');
-Route::get('/createqr', [App\Http\Controllers\QRController::class, 'createQr'])->name('createqr');
+Route::get('/viewqrs', [QRController::class, 'viewQrs'])->name('viewqrs');
+Route::post('/createqr', [QRController::class, 'createQr'])->name('createqr');
 Route::get('/createproduct', [App\Http\Controllers\QRController::class, 'createProductView'])->name('createproduct');
 Route::post('/createproductaction', [App\Http\Controllers\QRController::class, 'createProduct'])->name('createproductaction');
 Route::get('/addnode', [App\Http\Controllers\QRController::class, 'addNode'])->name('addnode');

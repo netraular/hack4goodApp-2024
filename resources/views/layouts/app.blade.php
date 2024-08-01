@@ -16,6 +16,13 @@
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
+    <!-- Animation On Sscroll library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -25,7 +32,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
 
 </head>
-<body>
   <div id="app">
     <header data-bs-theme="dark">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -37,14 +43,17 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <!-- <li class="nav-item">
-                <a class="nav-link active" href="/login">Particulares</a>
-              </li> -->
+              <li class="nav-item">
+                <a class="nav-link active" href="/">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/hack4good">Hack4Good</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link active" href="/empresas">Empresas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/viewqr?id=1">Ejemplo producto final</a>
+                <a class="nav-link active" href="/viewqr?id=1">Ejemplo</a>
               </li>
             </ul>
           </div>
@@ -75,15 +84,7 @@
   @yield('scripts')
 
   <script>
-    function changeBorder() {
-        var select = document.getElementById("inputCategory");
-        if (select.value !== "None")
-        {
-            select.classList.add("valid");
-        } else {
-            select.classList.remove("valid");
-        }
-    }
-  </script>
+    AOS.init();
+</script>
 </body>
 </html>
