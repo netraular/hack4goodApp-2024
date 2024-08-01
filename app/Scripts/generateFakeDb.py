@@ -1,7 +1,19 @@
 import mysql.connector
 import random
+from dotenv import load_dotenv
+import os
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv(dotenv_path='/var/www/html/hack4goodApp/.env')
 
 # Configura la conexión a la base de datos
+db_config = {
+    'host': os.getenv('DB_HOST'),
+    'user': os.getenv('DB_USERNAME'),
+    'password': os.getenv('DB_PASSWORD'),
+    'database': os.getenv('DB_DATABASE')
+}
+
 
 # Conecta a la base de datos
 conn = mysql.connector.connect(**db_config)
