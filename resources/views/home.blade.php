@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<img class="text-center" src="{{URL::asset('/images/particular 1.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;">
+<img class="text-center" src="{{URL::asset('/images/particular 1.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-down">
 
 <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
+    <div class="row" data-aos="zoom-in" data-aos-delay="500">
         <div class="col-lg-4">
             <img src="{{URL::asset('/images/scan_button.gif')}}" width="140" height="140" style="border-radius: 70px">
             <h2 class="fw-normal">Escanea</h2>
@@ -33,10 +33,10 @@
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
-    <img class="text-center" src="{{URL::asset('/images/particular 2.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;">
-    <img class="text-center" src="{{URL::asset('/images/particular 3.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;">
-    <img class="text-center" src="{{URL::asset('/images/particular 4.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;">
-    <img class="text-center" src="{{URL::asset('/images/particular 5.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;">
+    <img class="text-center" src="{{URL::asset('/images/particular 2.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-up" data-aos-delay="100">
+    <img class="text-center" src="{{URL::asset('/images/particular 3.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;" data-aos="fade-up" data-aos-delay="400">
+    <img class="text-center" src="{{URL::asset('/images/particular 4.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;" data-aos="fade-left" data-aos-delay="800">
+    <img class="text-center" src="{{URL::asset('/images/particular 5.png')}}" style="width:100%;max-width: 800px;margin:auto;display:block;" data-aos="fade-right" data-aos-delay="200">
 
 </div>
 
