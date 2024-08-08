@@ -1,7 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<img class="text-center" src="{{URL::asset('/images/particular 1.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-down">
+
+@if ($showBanner)
+<div class="d-flex justify-content-center align-items-center">
+    <div class="alert alert-success text-center" role="alert" data-aos="zoom-in">
+        <h2><b>Esta web es un proyecto del evento Hack4Good.</b></h2> {{ $banner->message ?? '' }}
+        <a href="/hack4good" target="_blank" class="btn  btn-primary">Más información</a> 
+                        
+        <a href="{{ url('/reset-banner-cookie') }}" target="_blank" class="btn btn-secondary">Ocultar este mensaje</a>
+        <br>
+    </div>
+</div>
+@endif
+
+
+<img class="text-center" src="{{URL::asset('/images/particular 1.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-down" >
 
 <div class="container marketing">
 
