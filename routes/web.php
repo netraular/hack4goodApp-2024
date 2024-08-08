@@ -14,15 +14,15 @@ use App\Http\Controllers\QRController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 Route::get('/empresas', function () {
     return view('home_empresa');
 });
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/qrscan', function () {
     return view('qrscan');
@@ -32,7 +32,7 @@ Route::get('/qrscan', function () {
 //     return view('product');
 // });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/product', [App\Http\Controllers\QRController::class, 'showProduct'])->name('product');
 Route::get('/viewqr', [App\Http\Controllers\QRController::class, 'viewQr'])->name('viewqr');
 Route::post('/scan-qr', [App\Http\Controllers\QRController::class, 'scanQR'])->name('scan.qr');

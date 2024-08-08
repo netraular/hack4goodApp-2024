@@ -137,16 +137,34 @@ class QRController extends Controller
     }
 
     public function addNode(Request $request) {
-        $node = new Node();
-        $node->lugar = $request->city;
-        $node->coord_x = $request->coordx;
-        $node->coord_y = $request->coordy;
-        $node->qr_id = $request->id;
-        $node->save();
         $qr = Qr::find($request->id);
+        if ($qr->end == 0)
+        {
+            $node = new Node();
+            $node->lugar = $request->city;
+            $node->coord_x = $request->coordx;
+            $node->coord_y = $request->coordy;
+            $node->qr_id = $request->id;
+            $node->save();
+            $product = Product::find($qr->product_id);
+            $nodos = Node::where("qr_id", "=", $qr->id)->get();
+            $message="Nodo añadido";
+            return view('addedNode', compact("qr", "product", "nodos",'message'));
+        }
         $product = Product::find($qr->product_id);
         $nodos = Node::where("qr_id", "=", $qr->id)->get();
-        return view('nodecreated', compact("qr", "product", "nodos"));
+        $message="No puedes añadir una parada a un recorrido finalizado!";
+        return view('addedNode', compact("qr", "product", "nodos",'message'));
+    }
+
+    public function endNode(Request $request)
+    {
+        $id = $request->input('id');
+        $qr = Qr::find($id);
+        $qr->end = 1;
+        $qr->save();
+        $message="Has terminado el recorrido ";
+        return view('addedNode', compact("qr",'message'));
     }
 
     public function buscar()
