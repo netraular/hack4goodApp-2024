@@ -12,12 +12,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 
+    <!-- popperjs -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     
     <!-- Animation On Sscroll library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -51,6 +54,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="/empresas">Empresas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/about-us">About us</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="/viewqr?id=1">Ejemplo</a>
