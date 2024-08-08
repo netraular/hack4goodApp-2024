@@ -24,7 +24,7 @@
                 <td style=" display: none;">{{ $result['qr']->id }}</td>
                 <td>
                     @if($result['product'] && $result['product']->pic)
-                    <img src="{{ asset($result['product']->pic) }}" alt="Imagen del producto" style="max-width: 100px; max-height: 100px;">
+                    <img src="{{ asset("products/".$result['product']->pic) }}" alt="Imagen del producto" style="max-width: 100px; max-height: 100px;">
                     @else
                     N/A
                     @endif

@@ -7,7 +7,7 @@
                 <div class="">Brand: {{ $product->marca }}</div>
                 <div class="">Category: {{ $product->category }}</div>
                 <div class="">Description: {{ $product->description }}</div>
-                <img src="{{ asset($product->pic) }}" alt="" style="width:300px">
+                <img src="{{ asset("products/".$product->pic) }}" alt="" style="width:300px">
             </div>
         </div>
         </div>

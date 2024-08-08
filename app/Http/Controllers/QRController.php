@@ -26,7 +26,7 @@ class QRController extends Controller
     public function createProduct(Request $request) {
         $product = new Product;
         $product->save();
-        $path = "products/$product->id.gif";
+        $path = "products/$product->id.jpg";
         $img = $request->picture;
         // dd($request->all());
         File::copy($img->getPathname(), $path);

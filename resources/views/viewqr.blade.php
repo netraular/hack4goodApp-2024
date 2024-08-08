@@ -98,7 +98,7 @@
 				<!-- INFORMACION -->
 				<div class="product-info-div">
 					<div class="product-pic-div">
-						<img src="{{ asset($product->pic) }}" alt="">
+						<img src="{{ asset("products/".$product->pic) }}" alt="">
 					</div>
 					<div class="product-text-info-div">
 						<div class="product-name-div">
@@ -124,7 +124,7 @@
 						</div>
 						
 						<div class="foto" style="margin-left: auto">
-							<img src="{{ asset($product->pic) }}" alt="" style="width:100%;max-width: 100px;">
+							<img src="{{ asset("products/".$product->pic) }}" alt="" style="width:100%;max-width: 100px;">
 						</div>
 					</div>
 					<br>
