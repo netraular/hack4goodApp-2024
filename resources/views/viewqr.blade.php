@@ -1,13 +1,118 @@
+<style>
+/* Container for centering the product info */
+.center-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+}
+
+.product-info-div {
+    display: flex;
+    align-items: center;
+    max-width: 800px; /* Limit the maximum width */
+    width: 100%;
+    background: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Ensure content does not overflow */
+	gap: 2rem;
+}
+
+.product-pic-div {
+    flex: 0 0 40%; /* 40% of the width for the image */
+    padding: 10px; /* Padding around the image */
+}
+
+.product-pic-div img {
+    width: 100%; /* Make image fill its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove bottom space under image */
+}
+
+.product-text-info-div {
+    flex: 1; /* Take remaining space */
+    padding: 10px; /* Padding around text */
+	height:100%;
+}
+
+.product-name-div {
+    font-size: 1.5em; /* Larger font size for name */
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.product-brand-div {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.product-description-div {
+    line-height: 1.5;
+    color: #333;
+	max-height: 200px;
+	overflow-y: auto;
+	text-overflow: ellapsis;
+	white-space: normal;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .product-info-div {
+        flex-direction: column; /* Stack image and text vertically */
+        text-align: center; /* Center text alignment */
+		gap: 1rem;
+    }
+
+    .product-pic-div {
+        flex: 0 0 auto; /* Image should not grow or shrink */
+        margin-bottom: 10px; /* Space between image and text */
+    }
+
+    .product-text-info-div {
+        flex: 1; /* Allow text to grow if needed */
+        padding: 0; /* Remove padding in mobile view */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-name-div {
+        font-size: 1.2em; /* Slightly smaller font size on very small screens */
+    }
+
+    .product-brand-div {
+        font-size: 0.9em; /* Slightly smaller font size */
+    }
+
+    .product-description-div {
+        font-size: 0.9em; /* Slightly smaller font size */
+    }
+}
+
+</style>
+
 @extends('layouts.app')
 @section('content')
 
 <div class="container marketing">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            </div>
-			<div class="">
-				<div class="">					
+			<div class="center-container">
+				<!-- INFORMACION -->
+				<div class="product-info-div">
+					<div class="product-pic-div">
+						<img src="{{ asset($product->pic) }}" alt="">
+					</div>
+					<div class="product-text-info-div">
+						<div class="product-name-div">
+							{{ $product->name }}
+						</div>
+						<div class="product-brand-div">
+							{{ $product->marca }}
+						</div>
+						<div class="product-description-div">
+							{{ $product->description }}
+						</div>
+					</div>
+				</div>
+				<!-- <div class="">					
 					<div class="" style="display:flex; flex-direction: row">
 						<div class="">
 							<div class="titulo">
@@ -26,9 +131,40 @@
 					<div class="">
 						Descripcion: {{ $product->description }}
 					</div>
+				</div> -->
+
+				<!-- NODOS -->
+				@if(count($nodos) > 0)
+				<div class="card-body">
+					<div style="text-align: center;"class="title">
+						<h1>RECORRIDO</h1>
+					</div>
+					<br>
+					<div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+						@foreach($nodos as $nodo)
+							<div class="step completed">
+								<div class="step-icon-wrap">
+								<div class="step-icon">{{ $nodo->lugar }}</div>
+								</div>
+								<!-- <h4 class="step-title">Confirmed Order</h4> -->
+							</div>
+						@endforeach
+						@if(isset($qr->end) && $qr->end == 1)
+							<div class="step completed">
+								<div class="step-icon-wrap">
+								<div class="step-icon">¡Tus manos!</i></div>
+								</div>
+							</div>
+						@else
+							<div class="step">
+								<div class="step-icon-wrap">
+								<div class="step-icon">Proximo destino...</i></div>
+								</div>
+							</div>
+						@endif
+					</div>
 				</div>
-				@if(isset($qr->end) && $qr->end == 1)
-				<div class="">
+				<!-- <div class="">
 					<br><br>
 					<div class="" style="font-size:20px">
 						Recorrido:
@@ -36,11 +172,10 @@
 					<br>
 					@foreach($nodos as $nodo)
 						<div class="" style="font-family: 'Madimi One', sans-serif; font-weight:400; font-style: normal; font-size: 15px;">	{{ $nodo->lugar }}</div>
-						<!-- <i class="bi bi-three-dots-vertical" style="color:#d2f7a6;"></i> -->
 						<img src="{{ asset('/images/path.png') }}" alt="" style="height:50px">
 					@endforeach
 					<div class="" style="font-family: 'Madimi One', sans-serif; font-weight:400; font-style: normal; font-size: 15px;"> Tus manos !</div>
-				</div>
+				</div> -->
 				@endif
             </div>
 			<br>
@@ -83,7 +218,6 @@
 					<input type="text" id="coordx" name="coordx" hidden>
 					<input type="text" id="coordy" name="coordy" hidden>
 					<input type="number" id="id" name="id" value="{{ $qr->id }}"hidden>
-					<!-- <button type="submit">Create node</button> -->
 				</form>
 				<div id="coordinates"></div>
 				<script>
@@ -119,5 +253,18 @@
 				</script>
 				@endif
         </div>
+		@if(isset($qr->end) && !$qr->end == 1)
+			<div class="end-button-div">
+				<form id="endNode" method="get" action="/endnode">
+					<input type="hidden" id="id" name="id" value="{{ $qr->id }}">
+					<button class="end-button" onclick='submitForm()'>END</button>
+				</form>
+				<script>
+					function submitForm() {
+						document.getElementById('endNode').submit();
+					}
+				</script>
+			</div>
+		@endif	
         </div>
 @endsection

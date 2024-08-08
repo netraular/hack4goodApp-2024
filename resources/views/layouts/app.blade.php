@@ -39,7 +39,7 @@
     <header data-bs-theme="dark">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a href='/'><img class="text-center" src="{{URL::asset('/logo.png')}}" style="width:50px  ;high:50px"></a>
+          <a href='/'><img class="text-center" src="{{URL::asset('/logo.png')}}" style="width:50px  ;height:50px"></a>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -75,7 +75,8 @@
         
     <footer class="mt-auto text-black-80">
       <hr>
-      <p style="text-align:center">ECO2 es un proyecto de la hackaton hack4good formado por los integrantes: Raúl Aquilué, Joel Casals, Alexandre Estapé, Zsolt Palfi, Adriá Sagrera, Fabian Scorcelli</p>
+      <p style="text-align:center">ECO2 es un proyecto de la hackaton hack4good formado por los integrantes: Raúl Aquilué, Joel Casals, Alexandre Estapé, Zsolt Palfi, Adriá Sagrera, Fabian Scorcelli. <a href="/about-us">¿Quienes somos?.</a></p>
+      
     </footer>
 
   </div>
