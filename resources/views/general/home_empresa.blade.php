@@ -3,12 +3,6 @@
 @section('content')
 <img class="text-center" src="{{URL::asset('/images/empresa 1.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;"  data-aos="fade-down">
 
-
-
-  <!-- Marketing messaging and featurettes
-  ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
-
   <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
@@ -43,11 +37,6 @@
     <img class="text-center" src="{{URL::asset('/images/empresa 4.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-left" data-aos-delay="100">
     <img class="text-center" src="{{URL::asset('/images/empresa 5.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-right" data-aos-delay="100">
     <img class="text-center" src="{{URL::asset('/images/empresa 6.png')}}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-left" data-aos-delay="100">
-
-    
-
-
-  
 
 </main>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
