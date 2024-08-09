@@ -13,6 +13,7 @@ Route::get('/', [HomeController::class, 'home']);
 Route::get('/about-us', [HomeController::class, 'aboutUs']);
 Route::get('/empresas', [HomeController::class, 'homeEmpresa']);
 Route::get('/reset-banner-cookie', [HomeController::class, 'saveBannerCookie']);
+Route::get('/hack4good', [HomeController::class, 'hack4good']);
 
 //Product
 Route::get('/product', [ProductController::class, 'showProduct'])->name('product');

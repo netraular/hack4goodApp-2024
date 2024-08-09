@@ -31,4 +31,8 @@ class HomeController extends Controller
      {
          return view('general/about-us');
      }
+     public function hack4good()
+     {
+         return view('general/hack4good');
+     }
 }
