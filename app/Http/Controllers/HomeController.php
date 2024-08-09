@@ -10,7 +10,8 @@ class HomeController extends Controller
          if (!$request->cookie('bannerSeen')) {
              $showBanner = true; 
              $cookie = cookie('bannerSeen', true, 60 * 24 * 30); // Set the cookie for 30 days
-             return response()->view('home', ['showBanner' => $showBanner])->withCookie($cookie);
+             return response()->view('general.home', ['showBanner' => $showBanner])->withCookie($cookie);
+
          } else {
              $showBanner = false;
              return view('general/home', ['showBanner' => $showBanner]);

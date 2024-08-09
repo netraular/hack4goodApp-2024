@@ -110,7 +110,7 @@ SE DEBE MIRAR DE CARGAR EL CSS YA QUE SINQUERE SE HA MOVIDO O BORRADO
         <h2>Hack4Good Team</h2>
         <h3> HackForGood, un evento que reúne a más de 1.000 estudiantes en varias ciudades, para trabajar juntos en la creación de soluciones de tecnología con un fin social.</h3>
         <a href="https://hackforgood.net/" target="_blank">Más información</a>  
-        <p>GreenPath | EcoRoute | GreenLane | EcoLog.</p>
+        <div class="bio">GreenPath | EcoRoute | GreenLane | EcoLog.</d>
         <div class="cards">
           <div class="card">
             <div class="card-img-wrapper">
