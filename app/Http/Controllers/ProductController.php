@@ -30,9 +30,8 @@ class ProductController extends Controller
         return redirect()->route('product', ['id' => $product->id]);
     }
 
-    public function createProductView(Request $request) {
-        // $product = new Product;
-        // $product->save();
-        return view('product/createproduct');
+    public function createProductView(Request $request, $barcode = null) {
+        if(isset($request->barcode)){$barcode=$request->barcode;}
+        return view('product.createproduct', ['barcode' => $barcode]);
     }
 }

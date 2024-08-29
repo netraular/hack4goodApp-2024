@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-SE DEBE MIRAR DE CARGAR EL CSS YA QUE SINQUERE SE HA MOVIDO O BORRADO
+
 
       <!DOCTYPE html>
       <html>
@@ -241,8 +241,6 @@ SE DEBE MIRAR DE CARGAR EL CSS YA QUE SINQUERE SE HA MOVIDO O BORRADO
         </div>
       </section>
           </div>
-
-          <script src="{{ asset('js/about-us.js') }}"></script>
       </body>
       </html>
 

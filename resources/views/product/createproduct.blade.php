@@ -176,8 +176,7 @@
 <link href="https://unpkg.com/cropperjs/dist/cropper.min.css" rel="stylesheet">
 <script src="https://unpkg.com/cropperjs/dist/cropper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-
-@extends('layouts.app')
+@extends('layouts.app',['alert' => $alert ?? "Test de alerta"])
 @section('content')
 <div class="container marketing">
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
@@ -186,6 +185,12 @@
                 <span>CREA TU</span><span>PRODUCTO</span>
             </div>
             <form id="myForm" action="/createproductaction" method="post" enctype="multipart/form-data" style="display:flex; flex-direction: column; gap: 1.75rem; width: 100%">
+                <!-- Barcode input -->
+                <div class="product-barcode-div" style="position: relative;">
+                    <label for='inputBarcode' class="product-barcode-input-label">Código de barras</label>
+                    <input name="barcode" type="text" id="inputBarcode" value="{{ $barcode ?? '' }}" required>
+                </div>
+
                 <div class="product-main-info-div">
                     <div class="product-three-main-div">
                         <!-- Name input -->
@@ -226,9 +231,6 @@
                         <img id='output' class="product-img-input">
                     </div>
                 </div>
-
-                <!-- Description input -->
-                
 
                 <!-- Confirm button -->
                 <div class="product-confirm-div">

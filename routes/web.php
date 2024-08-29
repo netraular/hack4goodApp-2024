@@ -6,10 +6,12 @@ use App\Http\Controllers\QRController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 
 //General
-// Auth::routes();
-Route::get('/', [HomeController::class, 'home']);
+Auth::routes();
+Route::get('/home', [HomeController::class, 'home']);
+Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/about-us', [HomeController::class, 'aboutUs']);
 Route::get('/empresas', [HomeController::class, 'homeEmpresa']);
 Route::get('/reset-banner-cookie', [HomeController::class, 'saveBannerCookie']);
@@ -35,4 +37,7 @@ Route::get('/nodecreated', [NodeController::class, 'nodeCreated'])->name('nodecr
 Route::get('/pathended', [NodeController::class, 'pathended'])->name('pathended');
 
 //Test
-Route::get('/test', [TestController::class, 'jqueryTest'])->name('jqueryTest');
+Route::get('/test', [TestController::class, 'alexTest'])->name('alexTest');
+Route::post('/form_alex', [TestController::class, 'alexTest2'])->name('form_alex');
+//Usuarios
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');

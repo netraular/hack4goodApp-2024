@@ -1,351 +1,142 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-<style>
-.container {
-	margin-top: 5vh;
-}
-
-.center-container {
-    display: flex;
-    justify-content: center;
-}
-
-.product-info-div {
-	display: flex;
-	flex-direction: column;
-	height: fit-content;
-	background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.product-general-info-div {
-    display: flex;
-    align-items: center;
-    max-width: 800px;
-	height: fit-content;
-    width: 100%;
-	gap: 2rem;
-}
-
-.product-pic-div {
-    flex: 0 0 40%;
-    padding: 10px;
-}
-
-.product-pic-div img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.product-text-info-div {
-    flex: 1;
-    padding: 10px;
-}
-
-.product-name-div {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.product-brand-div {
-    color: #666;
-    margin-bottom: 8px;
-}
-
-.product-description-div {
-    line-height: 1.5;
-    color: #333;
-	max-height: 200px;
-	overflow-y: auto;
-	text-overflow: ellapsis;
-	white-space: normal;
-}
-
-@media (max-width: 768px) {
-	.center-container {
-		display: block;
-		justify-content: center;
-	}
-    .product-info-div {
-        flex-direction: column;
-        text-align: center;
-		gap: 1rem;
-    }
-
-    .product-pic-div {
-        flex: 0 0 auto;
-        margin-bottom: 10px;
-    }
-
-    .product-text-info-div {
-        flex: 1;
-        padding: 0;
-    }
-
-	.card-body {
-		margin-top: 5vh;
-	}
-}
-
-@media (max-width: 480px) {
-    .product-name-div {
-        font-size: 1.2em;
-    }
-
-    .product-brand-div {
-        font-size: 0.9em;
-    }
-
-    .product-description-div {
-        font-size: 0.9em;
-    }
-}
-
-.product-final-info-div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 2rem;
-}
-
-#mapPopup {
-	display: none;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 400px;
-	height: 400px;
-	background-color: white;
-	border: 1px solid #ccc;
-	z-index: 1000;
-	padding: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#map {
-	width: 100%;
-	height: 70%;
-}
-
-#mapPopup button {
-	margin-top: 10px;
-}
-
-#overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 500;
-}
-
-.add-stop-div {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.add-stop-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.add-stop-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.add-stop-form-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 8px;
-}
-
-.add-stop-form-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    transition: border-color 0.3s ease;
-}
-
-.add-stop-form-input:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.add-stop-form-button {
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-stop-form-button:hover {
-    background-color: #0056b3;
-}
-
-.end-button {
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    background-color: red;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-	width: 100%;
-}
-
-.end-button:hover {
-    background-color: #AA0000;
-}
-
-
-</style>
+<script src="https://code.jscharting.com/latest/jscharting.js"></script>
+<script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
 
 @extends('layouts.app')
+
+@push('styles')
+    @vite('resources/css/viewqr.css')
+@endpush
+
 @section('content')
 
 <div class="container marketing">
 	<div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-		<div class="center-container">
-			<!-- INFORMACION -->
-			<div class="product-info-div">
-				<div class="product-general-info-div">
-					<div class="product-pic-div">
+		<div class="product-container">
+			<div class="product-info-container">
+				<div class="product-general-info">
+					<div class="product-general-pic">
 						<img src="{{ asset("products/".$product->pic) }}" alt="">
 					</div>
-					<div class="product-text-info-div">
-						<div class="product-name-div">
-							{{ $product->name }}
+					<div class="product-general-text">
+						<div class="product-general-name">
+							<h1>{{ $product->name }}</h1>
 						</div>
-						<div class="product-brand-div">
-							{{ $product->marca }}
+						<div class="product-general-brand">
+							<h4>{{ $product->marca }}</h4>
 						</div>
 						@if(isset($qr->end) && $qr->end == 1)
-							<div class="product-punctuation">
-								o 62/100
+							@php
+								// Get the score from your data
+								$score = 62; // Replace 62 with your actual score from $qr
+
+								// Determine the color class based on the score
+								if ($score < 40) {
+									$colorClass = 'bg-danger'; // red
+								} elseif ($score < 60) {
+									$colorClass = 'bg-warning'; // yellow/orange
+								} else {
+									$colorClass = 'bg-success'; // green
+								}
+							@endphp
+							<div class="product-punctuation-div">
+								<div class="product-punctuation d-flex align-items-center">
+									<span class="circle {{ $colorClass }}"></span>
+									<span class="ms-2">{{ $score }}/100</span>
+								</div>
 							</div>
 						@endif
-						<div class="product-description-div">
-							{{ $product->description }}
+						<div class="product-general-description">
+							<p>{{ $product->description }}</p>
 						</div>
 					</div>
 				</div>
 				<hr style="width: 50%; margin-left:25%;">
 				@if(isset($qr->end) && $qr->end == 1)
-					<div class="product-final-info-div">
-						<div class="product-final-info-title">
-							<h1>
-								Huella de carbono
-							</h1>
-						</div>
-						<div class="product-final-info-text">
-
-						</div>
-						<div class="co2" style="flex:1">
-							<div class="dist-title">
-								Distancia recorrida:
+				<div class="product-impact">
+					<div class="product-impact-title">
+						<h3>Product Impact</h3>
+					</div>
+					<div class="product-impact-info">
+						<div class="product-impact-distance">
+							<div class="product-impact-distance-img">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 fill-primary">
+									<g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 21C7.5 19.4 9 17.9673 9 16.2C9 14.4327 7.65685 13 6 13C4.34315 13 3 14.4327 3 16.2C3 17.9673 4.5 19.4 6 21ZM6 21H17.5C18.8807 21 20 19.8807 20 18.5C20 17.1193 18.8807 16 17.5 16H15M18 11C19.5 9.4 21 7.96731 21 6.2C21 4.43269 19.6569 3 18 3C16.3431 3 15 4.43269 15 6.2C15 7.96731 16.5 9.4 18 11ZM18 11H14.5C13.1193 11 12 12.1193 12 13.5C12 14.8807 13.1193 16 14.5 16H15.6" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+								</svg>
 							</div>
-							<div class="dist-value">
-								694.73km
-							</div>
-						</div>
-						<div class="dist" style="flex:1">
-							<div class="co2-title">
-								CO2 Producido:
-							</div>
-							<div class="co2-value">
-								43.07 kg
+							<div class="product-impact-distance-text">
+								<div class="product-impact-distance-title">
+									Distance Traveled
+								</div>
+								<div class="product-impact-distance-info">
+									3,500 km
+								</div>
 							</div>
 						</div>
-						<img src="{{ asset('/images/score.png') }}" alt="" style="width:200px; display: block; margin: auto">
-						<div class="map">
-							<img src="{{asset('/images/map.jpeg')}}" alt="" style="width:300px; display: block; margin: auto">
+						<div class="product-impact-co2">
+							<div class="product-impact-co2-img">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 fill-primary" >
+									<g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.44893 17.009C-0.246384 7.83762 7.34051 0.686125 19.5546 3.61245C20.416 3.81881 21.0081 4.60984 20.965 5.49452C20.5862 13.288 17.0341 17.7048 6.13252 17.9857C5.43022 18.0038 4.76908 17.6344 4.44893 17.009Z" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3.99999 21C5.50005 15.5 6 12.5 12 9.99997" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+								</svg>
+							</div>
+							<div class="product-impact-co2-text">
+								<div class="product-impact-co2-title">
+									C02 Emisions
+								</div>
+								<div class="product-impact-co2-info">
+									120 kg
+								</div>
+							</div>
 						</div>
 					</div>
+				</div>
 				@endif
 			</div>
 
-			<!-- NODOS -->
 			@if(count($nodos) > 0)
-				<div class="card-body">
-					<div style="text-align: center;"class="title">
-						<h1>RECORRIDO</h1>
+			<div class="product-journey-container">
+				<div class="product-journey">
+					<div class="product-journey-title">
+						<h3>Product Journey</h3>
 					</div>
-					<br>
-					<div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+					<div class="product-journey-steps-container">
 						@foreach($nodos as $nodo)
-							<div class="step completed">
-								<div class="step-icon-wrap">
-								<div class="step-icon">{{ $nodo->lugar }}</div>
+							<div class="product-journey-steps">
+								<div class="product-journey-steps-number-container">
+									<div class="product-journey-steps-number">{{ $loop->iteration }}</div>
 								</div>
-								<!-- <h4 class="step-title">Confirmed Order</h4> -->
+								<div class="product-journey-steps-text">
+									<div class="product-journey-steps-name">{{ $nodo->lugar }}</div>
+									<div class="product-journey-steps-description">Shipped</div>
+								</div>
 							</div>
 						@endforeach
 						@if(isset($qr->end) && $qr->end == 1)
-							<div class="step completed">
-								<div class="step-icon-wrap">
-								<div class="step-icon">¡Tus manos!</i></div>
+							<div class="product-journey-steps">
+								<div class="product-journey-steps-number-container">
+									<div class="product-journey-steps-number">{{ count($nodos) + 1 }}</div>
+								</div>
+								<div class="product-journey-steps-text">
+									<div class="product-journey-steps-name">¡Tus manos!</div>
+									<div class="product-journey-steps-description">Shipped</div>
 								</div>
 							</div>
 						@else
-							<div class="step">
-								<div class="step-icon-wrap">
-								<div class="step-icon">Proximo destino...</i></div>
+							<div class="product-journey-steps">
+								<div class="product-journey-steps-number-container">
+									<div class="product-journey-steps-number">{{ count($nodos) + 1 }}</div>
+								</div>
+								<div class="product-journey-steps-text">
+									<div class="product-journey-steps-name">Proximo destino...</div>
+									<div class="product-journey-steps-description">Shipped</div>
 								</div>
 							</div>
 						@endif
 					</div>
 				</div>
+			</div>
 			@endif
 		</div>
-		<br>
-		@if(isset($qr->end) && $qr->end == 1)
-			<div class="" style="display:flex">
-				<div class="co2" style="flex:1">
-					<div class="dist-title">
-						Distancia recorrida:
-					</div>
-					<div class="dist-value">
-						694.73km
-					</div>
-				</div>
-				<div class="dist" style="flex:1">
-					<div class="co2-title">
-						CO2 Producido:
-					</div>
-					<div class="co2-value">
-						43.07 kg
-					</div>
-				</div>
-			</div>
-			<img src="{{ asset('/images/score.png') }}" alt="" style="width:200px; display: block; margin: auto">
-			<div class="map">
-				<img src="{{asset('/images/map.jpeg')}}" alt="" style="width:300px; display: block; margin: auto">
-			</div>
-		@endif
 		@if(isset($qr->end) && !$qr->end == 1)
 			<div class="add-stop-div">
 				<div class="add-stop-title">

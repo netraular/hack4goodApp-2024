@@ -92,7 +92,7 @@ class QRController extends Controller
             $barcodeResult = shell_exec("zbarimg --quiet --raw " . escapeshellarg($imagePath));
 
             if ($barcodeResult) {
-                return response()->json(['message' => 'Código de barras encontrado', 'data' => trim($barcodeResult)]);
+                return redirect()->route('createproduct', ['barcode' => trim($barcodeResult),'alert' => "No se ha encontrado el producto. Añade a la web para poder visualizarlo."]);
             } else {
                 return redirect()->back()->with('error_message', 'No se ha podido encontrar ningún QR o código de barras');
             }
