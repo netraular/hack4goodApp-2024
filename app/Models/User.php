@@ -11,6 +11,12 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    // Definición de roles
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
+    const ROLE_COMPANY = 2;
+    const ROLE_COMPANYUSER = 3;
+    //$user->role = User::ROLE_CLIENT; // Ejemplo signar rol de cliente
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**

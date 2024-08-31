@@ -182,7 +182,7 @@
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         <div class="product-div" style="display: flex; flex-direction: column; gap: 1.75rem; width: 100%;">
             <div class="product-title-div">
-                <span>CREA TU</span><span>PRODUCTO</span>
+                <span>CREA TU</span><span> PRODUCTO</span>
             </div>
             <form id="myForm" action="/createproductaction" method="post" enctype="multipart/form-data" style="display:flex; flex-direction: column; gap: 1.75rem; width: 100%">
                 <!-- Barcode input -->
@@ -193,6 +193,8 @@
 
                 <div class="product-main-info-div">
                     <div class="product-three-main-div">
+                        <input name="companyid" type="number" id="userid" value="{{ Auth::user()->id }}" hidden>
+
                         <!-- Name input -->
                         <div class="product-name-div" style="position: relative;">
                             <input name="name" maxlength="20" type="text" id="inputName" required>
@@ -321,6 +323,7 @@
     var description = document.getElementById('inputDescription').value.trim();
     var category = document.getElementById('inputCategory').value;
     var out = document.getElementById('output');
+    var value = document.getElementById('userid').value;
 
     var regex = /^[a-zA-Z0-9]+$/;
 

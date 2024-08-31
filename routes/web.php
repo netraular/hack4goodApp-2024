@@ -39,5 +39,12 @@ Route::get('/pathended', [NodeController::class, 'pathended'])->name('pathended'
 //Test
 Route::get('/test', [TestController::class, 'alexTest'])->name('alexTest');
 Route::post('/form_alex', [TestController::class, 'alexTest2'])->name('form_alex');
+
 //Usuarios
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+});

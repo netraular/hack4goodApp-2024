@@ -23,9 +23,9 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->marca = $request->brand;
-        // dd($product);
         $product->pic = $path;
         $product->category = $request->inputCategory;
+        $product->company_id = $request->companyid;
         $product->update();
         return redirect()->route('product', ['id' => $product->id]);
     }

@@ -20,26 +20,28 @@
     </thead>
     <tbody>
       @foreach($products as $product)
-      <tr>
-        <td>{{$product->id}}</td>
-        <td> <img src="{{ asset("products/".$product->pic) }}" alt=""  style="max-width: 100px; max-height: 100px;"> </td>
-        <td>{{$product->name}}</td>
-        <td>{{$product->category}}</td>
-        <td>{{$product->marca}}</td>
-        <td>{{$product->description}}</td>
-        <td>
-          @if($qrs->where('product_id', $product->id)->count() > 0)
-            <button type="button" class="btn btn-link bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#qrModal{{$product->id}}" style="color:light-blue;"></button>
-          @endif
-        </td>
-        <td>
-          <form action="{{ route('createqr') }}" method="POST" style="display:inline;">
-            @csrf
-            <input type="hidden" name="id" value="{{ $product->id }}">
-            <button type="submit" class="btn btn-link bi bi-plus-square" style="color:green;"></button>
-          </form>
-        </td>
-      </tr>
+        @if($product->company_id == Auth::user()->id)
+        <tr>
+          <td>{{$product->id}}</td>
+          <td> <img src="{{ asset("products/".$product->pic) }}" alt=""  style="max-width: 100px; max-height: 100px;"> </td>
+          <td>{{$product->name}}</td>
+          <td>{{$product->category}}</td>
+          <td>{{$product->marca}}</td>
+          <td>{{$product->description}}</td>
+          <td>
+            @if($qrs->where('product_id', $product->id)->count() > 0)
+              <button type="button" class="btn btn-link bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#qrModal{{$product->id}}" style="color:light-blue;"></button>
+            @endif
+          </td>
+          <td>
+            <form action="{{ route('createqr') }}" method="POST" style="display:inline;">
+              @csrf
+              <input type="hidden" name="id" value="{{ $product->id }}">
+              <button type="submit" class="btn btn-link bi bi-plus-square" style="color:green;"></button>
+            </form>
+          </td>
+        </tr>
+        @endif
       @endforeach
     </tbody>
   </table>
