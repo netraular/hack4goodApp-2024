@@ -300,7 +300,7 @@
 
 			// Convert canvas to Blob and create a new File object
 			canvas.toBlob(function (blob) {
-				var file = new File([blob], 'cropped_image.png', { type: 'image/png' });
+				var file = new File([blob], 'cropped_image.png', { type: 'image/jpg' });
 				var hiddenInput = document.createElement('input');
 				hiddenInput.type = 'hidden';
 				hiddenInput.name = 'cropped_picture';
@@ -325,7 +325,7 @@
     var out = document.getElementById('output');
     var value = document.getElementById('userid').value;
 
-    var regex = /^[a-zA-Z0-9]+$/;
+    var regex = /^[a-zA-Z0-9 ]+$/;
 
     if (name === "" || brand === "" || description === "" || category === "None" || out.src === "") {
         alert("Please fill out all required fields.");

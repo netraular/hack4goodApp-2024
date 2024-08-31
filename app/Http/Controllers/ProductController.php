@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use File;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -14,12 +14,22 @@ class ProductController extends Controller
         return view('product/product', compact("product"));
     }
     public function createProduct(Request $request) {
+        // dd($request->all());
         $product = new Product;
         $product->save();
-        $path = "products/$product->id.jpg";
+        $path = "$product->id.jpg";
         $img = $request->picture;
-        // dd($request->all());
-        File::copy($img->getPathname(), $path);
+        $sourcePath = $img->getPathname();
+        if (file_exists($sourcePath)) {
+            if (File::copy($sourcePath, "products/$path")) {
+                dump('File copied successfully!');
+            } else {
+                dump('File copy failed.');
+            }
+        } else {
+            dump('Source file does not exist: ' . $sourcePath);
+        }
+        // File::copy($img->getPathname(), $path);
         $product->name = $request->name;
         $product->description = $request->description;
         $product->marca = $request->brand;
