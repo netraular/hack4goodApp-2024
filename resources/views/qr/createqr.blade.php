@@ -10,7 +10,14 @@
 
 @extends('layouts.app')
 @section('content')
+
 <div class="container marketing">
+@if(session('error'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
   <h1>
     Crea el seguimiento de un producto
   </h1>
@@ -30,8 +37,6 @@
     </thead>
     <tbody>
       @foreach($products as $product)
-        @auth
-        @if($product->company_id == Auth::user()->id)
         <tr>
           <td>{{$product->id}}</td>
           <td> <img src="{{ asset("products/".$product->pic) }}" alt=""  style="max-width: 100px; max-height: 100px;"> </td>
@@ -52,8 +57,6 @@
             </form>
           </td>
         </tr>
-        @endif
-        @endauth
       @endforeach
     </tbody>
   </table>

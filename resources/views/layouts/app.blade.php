@@ -127,6 +127,5 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" defer></script>
 
-    @yield('scripts')
 </body>
 </html>

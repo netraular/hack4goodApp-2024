@@ -17,8 +17,8 @@
 
 <img class="text-center mx-auto d-block" src="{{ URL::asset('/images/particular 1.png') }}" style="max-width: 1000px;" data-aos="fade-down">
 
-<div class="container marketing">
-    <div class="row" data-aos="zoom-in" data-aos-delay="500">
+<div class="container marketing justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-centerr" data-aos="zoom-in" data-aos-delay="500">
         <div class="col-lg-4 text-center">
             <img src="{{ URL::asset('/images/scan_button.gif') }}" width="140" height="140" style="border-radius: 70px" alt="Escanea">
             <h2 class="fw-normal">Escanea</h2>

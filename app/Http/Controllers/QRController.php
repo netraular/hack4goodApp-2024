@@ -11,40 +11,43 @@ use App\Models\Node;
 use Illuminate\Support\Facades\Validator;
 use Zxing\QrReader;
 use Zxing\QrCode\Exception\ReaderException;
-
+use Auth;
 
 class QRController extends Controller
 {
     public function viewQrs(Request $request) {
-        $products = Product::all();
-        $qrs = Qr::all(); // Obtener todos los registros de Qr
+        $userId = Auth::id();
+        $products = Product::where('user_id', $userId)->get();
+        $qrs = Qr::whereHas('product', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
         $qrImage = $request->query('qrImage'); // Obtener el ID del QR desde la consulta
         
         return view('qr/createqr', compact('products', 'qrs', 'qrImage'));
     }
 
     public function createQr(Request $request) {
-        $products = Product::all();
-        $qrs = Qr::all(); // Obtener todos los registros de Qr
-
-        if ($request->has('id')) {
-            $id = $request->id;
-            $qr = new Qr;
-            $qr->product_id = $id;
-            $qr->end = FALSE;
-            $qr->save();
-
-            $process = new Process(['python3', app_path() . "/Scripts/QRGenerator.py", $qr->id]);
-            $process->run();
-
-            if (!$process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-            }
-
-            // Redirige a /viewqrs con el ID del QR como parámetro
-            return redirect()->route('viewqrs', ['qrImage' => $qr->id]);
-        } else {
-            return redirect()->route('viewqrs');
+        if(!Auth::check() or !$request->has('id')){
+            return redirect()->route('viewqrs')->with('error', 'Debes estar logueado para crear un QR.');            
+        }else{
+            $products = Product::all();
+            $qrs = Qr::all(); // Obtener todos los registros de Qr
+    
+                $id = $request->id;
+                $qr = new Qr;
+                $qr->product_id = $id;
+                $qr->end = FALSE;
+                $qr->save();
+    
+                $process = new Process(['python3', app_path() . "/Scripts/QRGenerator.py", $qr->id]);
+                $process->run();
+    
+                if (!$process->isSuccessful()) {
+                    throw new ProcessFailedException($process);
+                }
+    
+                // Redirige a /viewqrs con el ID del QR como parámetro
+                return redirect()->route('viewqrs', ['qrImage' => $qr->id]);
         }
     }
     public function viewQr(Request $request) {
