@@ -28,7 +28,7 @@
 						@if(isset($qr->end) && $qr->end == 1)
 							@php
 								// Get the score from your data
-								$score = 62; // Replace 62 with your actual score from $qr
+								$score = rand(0,100); // Replace 62 with your actual score from $qr
 
 								// Determine the color class based on the score
 								if ($score < 40) {
@@ -69,7 +69,8 @@
 									Distance Traveled
 								</div>
 								<div class="product-impact-distance-info">
-									3,500 km
+
+									{{2000 * (1 - ($score / 100))}} km
 								</div>
 							</div>
 						</div>
@@ -84,7 +85,7 @@
 									C02 Emisions
 								</div>
 								<div class="product-impact-co2-info">
-									120 kg
+								{{(250 * (1 - ($score / 100)))}} kg
 								</div>
 							</div>
 						</div>
