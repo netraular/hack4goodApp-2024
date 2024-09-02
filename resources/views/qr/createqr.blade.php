@@ -78,6 +78,7 @@
                 <th scope="col">End</th>
                 <th scope="col">Distancia</th>
                 <th scope="col">Puntuación</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -88,6 +89,9 @@
                     <td>{{$qr->end ? '1' : '0'}}</td>
                     <td>{{$qr->end ? $qr->distancia : '-'}}</td>
                     <td>{{$qr->end ? $qr->puntuacion : '-'}}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary" onclick="reloadAndShowQrModal('{{ $qr->id }}')">Ver QR</button>
+                    </td>
                   </tr>
                 @endif
               @endforeach
@@ -146,12 +150,36 @@
   </script>
   @endif
 </div>
-@endsection
 
-@section('scripts')
+
 <script>
     $(document).ready(function() {
         $('#manage-qrs-table').DataTable();
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#manage-qrs-table').DataTable();
+    });
+
+    function reloadAndShowQrModal(qrId) {
+        // Recargar la página con el parámetro de consulta qrImage
+        window.location.href = window.location.pathname + '?qrImage=' + qrId;
+    }
+
+    @if(isset($qrImage))
+    document.addEventListener('DOMContentLoaded', function() {
+      $('#qrCodeModal').modal('show');
+    });
+    @endif
+
+    function saveImage() {
+      var imgElement = document.getElementById('qr');
+      var link = document.createElement('a');
+      link.href = imgElement.src;
+      link.download = 'qr.jpg';
+      link.click();
+    }
+</script>
+
 @endsection
