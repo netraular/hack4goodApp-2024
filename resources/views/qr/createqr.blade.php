@@ -1,3 +1,13 @@
+<style>
+  .buttons-modal {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
 @extends('layouts.app')
 @section('content')
 <div class="container marketing">
@@ -20,6 +30,7 @@
     </thead>
     <tbody>
       @foreach($products as $product)
+        @auth
         @if($product->company_id == Auth::user()->id)
         <tr>
           <td>{{$product->id}}</td>
@@ -42,6 +53,7 @@
           </td>
         </tr>
         @endif
+        @endauth
       @endforeach
     </tbody>
   </table>
@@ -97,8 +109,15 @@
         </div>
         <div class="modal-body text-center">
           <img id='qr' src="{{ isset($qrImage) ? asset('qr/qr_'.$qrImage.'.png') : '' }}" class="center" >
-          <div>
-            <button onclick="saveImage()" class="btn btn-primary" style="margin:auto;display:block;">Guardar QR</button>
+          <div class="buttons-modal">
+            <div>
+              <button onclick="saveImage()" class="btn btn-primary" style="margin:auto;display:block;">Guardar QR</button>
+            </div>
+            <div>
+            <button onclick="window.location.href='https://eco2.netshiba.com/viewqr?id={{ $qrImage }}'" class="btn btn-primary" style="margin:auto;display:block;">
+              Ver QR
+            </button>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
