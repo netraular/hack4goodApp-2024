@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -14,6 +15,9 @@ class ProductController extends Controller
         return view('product/product', compact("product"));
     }
     public function createProduct(Request $request) {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to create a product.');
+        }
         // dd($request->all());
         $product = new Product;
         $product->save();

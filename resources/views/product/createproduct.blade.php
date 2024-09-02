@@ -176,7 +176,7 @@
 <link href="https://unpkg.com/cropperjs/dist/cropper.min.css" rel="stylesheet">
 <script src="https://unpkg.com/cropperjs/dist/cropper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-@extends('layouts.app',['alert' => $alert ?? "Test de alerta"])
+@extends('layouts.app') 
 @section('content')
 <div class="container marketing">
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
@@ -193,7 +193,7 @@
 
                 <div class="product-main-info-div">
                     <div class="product-three-main-div">
-                        <input name="companyid" type="number" id="userid" value="{{ Auth::user()->id }}" hidden>
+                        <input name="companyid" type="number" id="userid" value="@auth{{ Auth::user()->id }}@endauth" hidden>
 
                         <!-- Name input -->
                         <div class="product-name-div" style="position: relative;">
@@ -235,6 +235,7 @@
                 </div>
 
                 <!-- Confirm button -->
+                <input type="hidden" id="userAuth" value="{{ Auth::check() }}">
                 <div class="product-confirm-div">
                     <button class="btn btn-primary" type="button" onClick="getData()">Crear producto</button>
                 </div>
@@ -262,9 +263,31 @@
             </div>
         </div>
     </div>
+
+</div>
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Notice</h5>
+                <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body" id="alertModalBody">
+                <!-- Alert message will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+    function showAlert(message) {
+        document.getElementById('alertModalBody').textContent = message;
+        $('#alertModal').modal('show');
+    }
 	function loadFile(event) {
 		var output = document.getElementById('output');
 		var icon = document.getElementById('icon');
@@ -324,16 +347,22 @@
     var category = document.getElementById('inputCategory').value;
     var out = document.getElementById('output');
     var value = document.getElementById('userid').value;
+    var userAuth = document.getElementById('userAuth').value;
 
     var regex = /^[a-zA-Z0-9 ]+$/;
 
     if (name === "" || brand === "" || description === "" || category === "None" || out.src === "") {
-        alert("Please fill out all required fields.");
+        showAlert("Please fill out all required fields.");
         return;
     }
 
     if (!regex.test(name) || !regex.test(brand) || !regex.test(description)) {
-        alert("Please use only letters or numbers!");
+        showAlert("Please use only letters or numbers!");
+        return;
+    }
+
+    if (userAuth !== "1") {
+        showAlert("Please Login to use this feature");
         return;
     }
 
