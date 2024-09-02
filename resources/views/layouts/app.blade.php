@@ -47,17 +47,19 @@
                                 <a class="nav-link active" href="/">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/hack4good">Hack4Good</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link active" href="/empresas">Empresas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/about-us">About us</a>
+                                <a class="nav-link active" href="/viewqr?id=3">Ejemplo 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/viewqr?id=1">Ejemplo</a>
-                                <!-- Aqui habia puesto un {'{ $alert }'} despues de 'Ejemplo' daba error! -->
+                                <a class="nav-link active" href="/viewqr?id=1">Ejemplo 2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/hack4good">Hack4Good</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/about-us">About us</a>
                             </li>
                         </ul>
 
