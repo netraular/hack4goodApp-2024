@@ -6,10 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Qr;
 use App\Models\Node;
+use Auth;
 
 class NodeController extends Controller
 {
     public function addNode(Request $request) {
+        
+        if(!Auth::check()){
+            return redirect()->back()->with('error', 'Debes estar logueado para modificar las paradas del producto.');
+        }
+
         $qr = Qr::find($request->id);
         if ($qr->end == 0)
         {
@@ -32,6 +38,10 @@ class NodeController extends Controller
 
     public function endNode(Request $request)
     {
+        if(!Auth::check()){
+            return redirect()->back()->with('error', 'Debes estar logueado para modificar las paradas del producto.');
+        }
+
         $id = $request->input('id');
         $qr = Qr::find($id);
         $qr->end = 1;

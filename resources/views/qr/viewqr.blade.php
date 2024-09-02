@@ -11,6 +11,13 @@
 @section('content')
 
 <div class="container marketing">
+	
+@if(session('error'))
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			{{ session('error') }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	@endif
 	<div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
 		<div class="product-container">
 			<div class="product-info-container">
