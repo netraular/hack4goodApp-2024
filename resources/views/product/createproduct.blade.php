@@ -263,7 +263,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -288,101 +287,92 @@
         document.getElementById('alertModalBody').textContent = message;
         $('#alertModal').modal('show');
     }
-	function loadFile(event) {
-		var output = document.getElementById('output');
-		var icon = document.getElementById('icon');
-		output.src = URL.createObjectURL(event.target.files[0]);
-		output.style.height = '8.75rem';
-		output.style.width = '100%';
-		output.style.border = '2px dotted black';
-		output.style.borderRadius = '6px';
-		icon.style.display = 'none';
 
-		// Open the modal
-		$('#cropModal').modal('show');
+    function loadFile(event) {
+        var output = document.getElementById('output');
+        var icon = document.getElementById('icon');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.style.height = '100%';
+        output.style.width = '100%';
+        output.style.border = '2px dotted black';
+        output.style.borderRadius = '6px';
+        icon.style.display = 'none';
 
-		// Initialize the cropper
-		var image = document.getElementById('image');
-		image.src = URL.createObjectURL(event.target.files[0]);
-		var cropper = new Cropper(image, {
-			aspectRatio: 1 / 1, // Square crop
-			viewMode: 1,
-			dragMode: 'move',
-			autoCropArea: 1,
-			cropBoxMovable: true,
-			cropBoxResizable: true,
-		});
+        // Open the modal
+        $('#cropModal').modal('show');
 
-		// Handle the crop button click
-		document.getElementById('cropButton').addEventListener('click', function ()
-		{
-			var canvas = cropper.getCroppedCanvas();
-			output.src = canvas.toDataURL();
-			$('#cropModal').modal('hide');
-			cropper.destroy();
+        // Initialize the cropper
+        var image = document.getElementById('image');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        var cropper = new Cropper(image, {
+            aspectRatio: 1 / 1, // Square crop
+            viewMode: 1,
+            dragMode: 'move',
+            autoCropArea: 1,
+            cropBoxMovable: true,
+            cropBoxResizable: true,
+        });
 
-			// Convert canvas to Blob and create a new File object
-			canvas.toBlob(function (blob) {
-				var file = new File([blob], 'cropped_image.png', { type: 'image/jpg' });
-				var hiddenInput = document.createElement('input');
-				hiddenInput.type = 'hidden';
-				hiddenInput.name = 'cropped_picture';
-				hiddenInput.value = file;
-				document.getElementById('myForm').appendChild(hiddenInput);
+        // Handle the crop button click
+        document.getElementById('cropButton').addEventListener('click', function () {
+            var canvas = cropper.getCroppedCanvas();
+            output.src = canvas.toDataURL();
+            output.style.display = 'block'; // Ensure the cropped image is displayed
+            $('#cropModal').modal('hide');
+            cropper.destroy();
 
-				window.croppedFile = file;
-			});
-		});
-	}
+            // Convert canvas to Blob and create a new File object
+            canvas.toBlob(function (blob) {
+                var file = new File([blob], 'cropped_image.png', { type: 'image/png' });
+                var dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById('picture').files = dataTransfer.files;
 
-	window.onload = function() {
-		var pic = document.getElementById('picture');
-		pic.value = "";
-	}
-
-	function getData() {
-    var name = document.getElementById('inputName').value.trim();
-    var brand = document.getElementById('inputBrand').value.trim();
-    var description = document.getElementById('inputDescription').value.trim();
-    var category = document.getElementById('inputCategory').value;
-    var out = document.getElementById('output');
-    var value = document.getElementById('userid').value;
-    var userAuth = document.getElementById('userAuth').value;
-
-    var regex = /^[a-zA-Z0-9 ]+$/;
-
-    if (name === "" || brand === "" || description === "" || category === "None" || out.src === "") {
-        showAlert("Please fill out all required fields.");
-        return;
+                window.croppedFile = file;
+            });
+        });
     }
 
-    if (!regex.test(name) || !regex.test(brand) || !regex.test(description)) {
-        showAlert("Please use only letters or numbers!");
-        return;
+    window.onload = function() {
+        var pic = document.getElementById('picture');
+        pic.value = "";
     }
 
-    if (userAuth !== "1") {
-        showAlert("Please Login to use this feature");
-        return;
-    }
+    function getData() {
+        var name = document.getElementById('inputName').value.trim();
+        var brand = document.getElementById('inputBrand').value.trim();
+        var description = document.getElementById('inputDescription').value.trim();
+        var category = document.getElementById('inputCategory').value;
+        var out = document.getElementById('output');
+        var value = document.getElementById('userid').value;
+        var userAuth = document.getElementById('userAuth').value;
 
-    var form = document.getElementById('myForm');
-    var croppedPictureInput = form.querySelector('input[name="cropped_picture"]');
-    if (croppedPictureInput && window.croppedFile) {
-        var dataTransfer = new DataTransfer();
-		dataTransfer.items.add(window.croppedFile); // Add the File object
-        form.picture.files = dataTransfer.files;
-    }
+        var regex = /^[a-zA-Z0-9 ]+$/;
 
-    form.submit();
-}
+        if (name === "" || brand === "" || description === "" || category === "None" || out.src === "") {
+            showAlert("Please fill out all required fields.");
+            return;
+        }
+
+        if (!regex.test(name) || !regex.test(brand) || !regex.test(description)) {
+            showAlert("Please use only letters or numbers!");
+            return;
+        }
+
+        if (userAuth !== "1") {
+            showAlert("Please Login to use this feature");
+            return;
+        }
+
+        var form = document.getElementById('myForm');
+        form.submit();
+    }
 </script>
 
 <script>
     function changeBorder() {
         var select = document.getElementById("inputCategory");
-        if (select.value !== "None")
-        {
+        if (select.value !== "None") {
             select.classList.add("valid");
         } else {
             select.classList.remove("valid");
