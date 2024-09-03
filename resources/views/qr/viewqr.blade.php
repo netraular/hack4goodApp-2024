@@ -20,7 +20,7 @@
 @endif
 @if($product->user_id == null)
 	<div class="alert alert-warning alert-dismissible fade show" role="alert">
-		<strong>Notice:</strong> This product is not real and is only there for demo purposes.
+		<strong>Notice:</strong> This product is not real and is only here for demo purposes.
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 @endif
