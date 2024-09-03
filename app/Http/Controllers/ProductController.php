@@ -39,7 +39,7 @@ class ProductController extends Controller
         $product->marca = $request->brand;
         $product->pic = $path;
         $product->category = $request->inputCategory;
-        $product->company_id = $request->companyid;
+        $product->user_id = $request->companyid;
         $product->update();
         return redirect()->route('product', ['id' => $product->id]);
     }

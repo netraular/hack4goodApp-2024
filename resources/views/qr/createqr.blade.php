@@ -167,11 +167,11 @@
         window.location.href = window.location.pathname + '?qrImage=' + qrId;
     }
 
-    @if(isset($qrImage))
-    document.addEventListener('DOMContentLoaded', function() {
-      $('#qrCodeModal').modal('show');
-    });
-    @endif
+    // @if(isset($qrImage))
+    //   document.addEventListener('DOMContentLoaded', function() {
+    //     $('#qrCodeModal').modal('show');
+    //   });
+    // @endif
 
     function saveImage() {
       var imgElement = document.getElementById('qr');

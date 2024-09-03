@@ -27,9 +27,17 @@ class QRController extends Controller
     }
 
     public function createQr(Request $request) {
-        if(!Auth::check() or !$request->has('id')){
+        $product = Product::where('id', $request->id)->first();
+        if(!Auth::check() or !$request->has('id'))
+        {
             return redirect()->route('viewqrs')->with('error', 'Debes estar logueado para crear un QR.');            
-        }else{
+        }
+        else if (Auth::user()->id != $product->user_id)
+        {
+            return redirect()->route('viewqrs')->with('error', 'No puedes generar un QR para un producto que no es tuyo!');   
+        }
+        else
+        {
             $products = Product::all();
             $qrs = Qr::all(); // Obtener todos los registros de Qr
     
@@ -52,6 +60,10 @@ class QRController extends Controller
     }
     public function viewQr(Request $request) {
         $qr = Qr::find($request->id);
+        $product = Product::where('id', $qr->product_id)->first();
+        if ($product->user_id != null)
+            if(!$qr->end && $product->user_id != Auth::user()->id)
+                return redirect()->route('viewqrs')->with('error', 'Debes estar logueado para ver ese QR.');
         $product = Product::find($qr->product_id);
         $nodos = Node::where("qr_id", "=", $qr->id)->get();
         return view('qr/viewqr', compact("qr", "product", "nodos"));

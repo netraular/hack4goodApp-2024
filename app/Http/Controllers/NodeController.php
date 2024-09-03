@@ -11,12 +11,16 @@ use Auth;
 class NodeController extends Controller
 {
     public function addNode(Request $request) {
-        
+        $qr = Qr::find($request->id);
+        $product = Product::find($qr->product_id);
         if(!Auth::check()){
             return redirect()->back()->with('error', 'Debes estar logueado para modificar las paradas del producto.');
         }
+        else if ($product->user_id != Auth::user()->id){
+            return redirect()->back()->with('error', 'No puedes modificar este recorrido, no es tuyo.');
+        }
 
-        $qr = Qr::find($request->id);
+        
         if ($qr->end == 0)
         {
             $node = new Node();
@@ -25,7 +29,7 @@ class NodeController extends Controller
             $node->coord_y = $request->coordy;
             $node->qr_id = $request->id;
             $node->save();
-            $product = Product::find($qr->product_id);
+            
             $nodos = Node::where("qr_id", "=", $qr->id)->get();
             $message="Nodo añadido";
             return view('node/addedNode', compact("qr", "product", "nodos",'message'));
