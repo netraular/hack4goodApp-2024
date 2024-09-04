@@ -55,14 +55,14 @@
             <div class="card-img-wrapper">
               <img src="{{ asset('programador3.jpeg') }}" alt="Fabian Scorcelli">
               <div class="bio">
-                <p>.</p>
+                <p>Software Developer student. Audivisual Artist.</p>
               </div>
             </div>
             <a href="#" class="social-icon"><i class=""></i></a>
             <div class="card-content-wrapper">
               <a href="#" class="card-content">
                 <h3>Fabian Scorcelli</h3>
-                <p>Producer of the video presentation</p>
+                <p>Logistics and Customer consultant. Audiovisual Design.</p>
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
