@@ -17,6 +17,7 @@ export default defineConfig({
         alias: {
             '$': 'jquery',
             'jQuery': 'jquery',
+            'aos': 'aos/dist/aos.js', // Alias para AOS
         },
     },
 });
