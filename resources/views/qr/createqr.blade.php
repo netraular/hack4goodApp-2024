@@ -121,7 +121,7 @@
               <button onclick="saveImage()" class="btn btn-primary" style="margin:auto;display:block;">Guardar QR</button>
             </div>
             <div>
-            <button onclick="window.location.href='https://eco2.netshiba.com/viewqr?id={{ $qrImage }}'" class="btn btn-primary" style="margin:auto;display:block;">
+            <button onclick="window.location.href='https://eco2.raular.com/viewqr?id={{ $qrImage }}'" class="btn btn-primary" style="margin:auto;display:block;">
               Ver QR
             </button>
             </div>

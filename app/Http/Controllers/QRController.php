@@ -93,7 +93,7 @@ class QRController extends Controller
 
                 if ($qrCodeResult) {
                     // Verifica si el resultado es una URL válida y si coincide con el formato esperado
-                    if (filter_var($qrCodeResult, FILTER_VALIDATE_URL) !== false && strpos($qrCodeResult, 'https://eco2.netshiba.com/') === 0) {
+                    if (filter_var($qrCodeResult, FILTER_VALIDATE_URL) !== false && strpos($qrCodeResult, 'https://eco2.raular.com/') === 0) {
                         return redirect()->away($qrCodeResult);
                     } else {
                         return response()->json(['message' => 'El código qr no es un producto.', 'data' => $qrCodeResult]);

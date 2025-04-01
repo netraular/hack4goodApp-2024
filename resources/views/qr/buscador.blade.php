@@ -38,7 +38,7 @@
                 <td>{{ $result['node'] ? $result['node']->lugar : 'N/A' }}</td>
                 
                 <td>
-                    <a href="https://eco2.netshiba.com/viewqr?id={{ $result['qr']->id }}" class="btn btn-primary">Saber más</a>
+                    <a href="https://eco2.raular.com/viewqr?id={{ $result['qr']->id }}" class="btn btn-primary">Saber más</a>
                 </td>
             </tr>
             @endforeach
