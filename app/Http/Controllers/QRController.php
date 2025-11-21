@@ -92,6 +92,7 @@ class QRController extends Controller
                 $qrCodeResult = $qrcode->text(); //return decoded text from QR Code
 
                 if ($qrCodeResult) {
+                    $qrCodeResult = str_replace('netshiba.com', 'raular.com', $qrCodeResult);
                     // Verifica si el resultado es una URL válida y si coincide con el formato esperado
                     if (filter_var($qrCodeResult, FILTER_VALIDATE_URL) !== false && strpos($qrCodeResult, 'https://eco2.raular.com/') === 0) {
                         return redirect()->away($qrCodeResult);
