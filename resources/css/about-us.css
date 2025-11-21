@@ -192,13 +192,13 @@ section {
 }
 
 @media screen and (max-width: 1200px) {
-  .cards {
+  section .cards {
     grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media screen and (max-width: 768px) {
-  .cards {
+  section .cards {
     grid-template-columns: 1fr; 
   }
 }

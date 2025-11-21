@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap");
 
-@mixin mQ($rem) {
-  @media screen and (min-width: $rem) {
-    @content;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -181,13 +175,13 @@ section {
 }
 
 @media screen and (max-width: 1200px) {
-  .cards {
+  section .cards {
     grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media screen and (max-width: 768px) {
-  .cards {
+  section .cards {
     grid-template-columns: 1fr; 
   }
 }
