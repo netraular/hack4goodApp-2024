@@ -9,7 +9,17 @@
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 
-html, body{background-color: #FCFEF5; overflow-x: hidden;}
+html, body {
+    background-color: #FCFEF5 !important;
+    overflow-x: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+    html, body {
+        background-color: #FCFEF5 !important;
+        color: #212529 !important;
+    }
+}
 
 
 /* CAROUSEL
