@@ -17,10 +17,7 @@ body {
   min-height: 100vh;
 }
 
-a {
-  color: rgb(64, 242, 248);
-  text-decoration: none;
-}
+
 
 img {
   max-width: 100%;
@@ -47,7 +44,7 @@ section {
 
   p {
     line-height: 1.7;
-    color: #f4faca;
+    color: #111;
     max-width: 70rem;
     margin: 0 auto;
     font-size: clamp(0.9rem, 0.825rem + 0.3vw, 1.2rem);

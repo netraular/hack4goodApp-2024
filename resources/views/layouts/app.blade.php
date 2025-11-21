@@ -67,9 +67,6 @@
                                 <a class="nav-link active" href="/viewqr?id=4">Ejemplo 3</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/hack4good">Hack4Good</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link active" href="/about-us">About us</a>
                             </li>
                         </ul>

@@ -13,8 +13,9 @@
 }
 
 body {
-  background: #e8eaef;
+  background: #f6f2e9;
   min-height: 100vh;
+  color: #1c1c1c;
 }
 
 a {
@@ -37,6 +38,10 @@ section {
   text-align: center;
   width: calc(min(90rem, 90%));
   margin-inline: auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 2rem;
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  box-shadow: 0 25px 45px rgba(26, 22, 16, 0.08);
 
   p,
   h2,
@@ -180,6 +185,10 @@ section {
       
     }
   }
+}
+
+.text-muted {
+  color: rgba(34, 34, 34, 0.7) !important;
 }
 
 @media screen and (max-width: 1200px) {
