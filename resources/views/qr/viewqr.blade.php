@@ -13,6 +13,7 @@
 @php
 	$completedJourney = isset($qr->end) && $qr->end == 1;
 	$nodeCount = count($nodos);
+	$totalDistanceKm = $totalDistanceKm ?? 0;
 	$score = null;
 	$colorClass = '';
 	$scoreHex = '#16a34a';
@@ -20,9 +21,10 @@
 	$co2Kg = null;
 
 	if ($completedJourney) {
-		$baseScore = max(20, 100 - ($nodeCount * 8));
-		$randomVariance = rand(-8, 8); // Mantiene variación ligera por vista
-		$score = max(5, min(100, $baseScore + $randomVariance));
+		$normalizedDistance = min(1, $totalDistanceKm / 8000);
+		$distanceScore = 100 - ($normalizedDistance * 85); // penaliza recorridos largos
+		$nodePenalty = min($nodeCount * 2, 12);
+		$score = max(5, (int) round($distanceScore - $nodePenalty));
 
 		if ($score < 40) {
 			$colorClass = 'bg-danger';
@@ -35,8 +37,8 @@
 			$scoreHex = '#16a34a';
 		}
 
-		$distanceKm = round(2000 * (1 - ($score / 100)));
-		$co2Kg = round(250 * (1 - ($score / 100)), 1);
+		$distanceKm = round($totalDistanceKm);
+		$co2Kg = max(0.1, round($totalDistanceKm * 0.18, 1));
 	}
 @endphp
 

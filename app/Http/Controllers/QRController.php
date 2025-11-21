@@ -10,7 +10,6 @@ use App\Models\Qr;
 use App\Models\Node;
 use Illuminate\Support\Facades\Validator;
 use Zxing\QrReader;
-use Zxing\QrCode\Exception\ReaderException;
 use Auth;
 
 class QRController extends Controller
@@ -65,8 +64,13 @@ class QRController extends Controller
             if(!$qr->end && $product->user_id != Auth::user()->id)
                 return redirect()->route('viewqrs')->with('error', 'Debes estar logueado para ver ese QR.');
         $product = Product::find($qr->product_id);
-        $nodos = Node::where("qr_id", "=", $qr->id)->get();
-        return view('qr/viewqr', compact("qr", "product", "nodos"));
+        $nodos = Node::where("qr_id", "=", $qr->id)
+            ->orderBy('id')
+            ->get();
+
+        $totalDistanceKm = $this->calculateRouteDistance($nodos);
+
+        return view('qr/viewqr', compact("qr", "product", "nodos", "totalDistanceKm"));
     }
     public function scanQR(Request $request)
     {
@@ -100,7 +104,7 @@ class QRController extends Controller
                         return response()->json(['message' => 'El código qr no es un producto.', 'data' => $qrCodeResult]);
                     }
                 }
-            } catch (ReaderException $e) {
+            } catch (\Throwable $e) {
                 // Handle QR Code reader exception
             }
 
@@ -138,5 +142,48 @@ class QRController extends Controller
         }
 
         return view('qr/buscador', compact('results'));
+    }
+
+    private function calculateRouteDistance($nodes): float
+    {
+        if ($nodes->count() < 2) {
+            return 0.0;
+        }
+
+        $distance = 0.0;
+
+        for ($i = 1; $i < $nodes->count(); $i++) {
+            $prev = $nodes[$i - 1];
+            $current = $nodes[$i];
+
+            if (!isset($prev->coord_x, $prev->coord_y, $current->coord_x, $current->coord_y)) {
+                continue;
+            }
+
+            $distance += $this->haversineDistance(
+                floatval($prev->coord_x),
+                floatval($prev->coord_y),
+                floatval($current->coord_x),
+                floatval($current->coord_y)
+            );
+        }
+
+        return round($distance, 2);
+    }
+
+    private function haversineDistance(float $latFrom, float $lonFrom, float $latTo, float $lonTo): float
+    {
+        $earthRadius = 6371; // km
+
+        $latFrom = deg2rad($latFrom);
+        $lonFrom = deg2rad($lonFrom);
+        $latTo = deg2rad($latTo);
+        $lonTo = deg2rad($lonTo);
+
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $earthRadius * $angle;
     }
 }
