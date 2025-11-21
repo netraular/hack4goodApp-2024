@@ -10,6 +10,36 @@
 
 @section('content')
 
+@php
+	$completedJourney = isset($qr->end) && $qr->end == 1;
+	$nodeCount = count($nodos);
+	$score = null;
+	$colorClass = '';
+	$scoreHex = '#16a34a';
+	$distanceKm = null;
+	$co2Kg = null;
+
+	if ($completedJourney) {
+		$baseScore = max(20, 100 - ($nodeCount * 8));
+		$randomVariance = rand(-8, 8); // Mantiene variación ligera por vista
+		$score = max(5, min(100, $baseScore + $randomVariance));
+
+		if ($score < 40) {
+			$colorClass = 'bg-danger';
+			$scoreHex = '#dc2626';
+		} elseif ($score < 70) {
+			$colorClass = 'bg-warning';
+			$scoreHex = '#f59e0b';
+		} else {
+			$colorClass = 'bg-success';
+			$scoreHex = '#16a34a';
+		}
+
+		$distanceKm = round(2000 * (1 - ($score / 100)));
+		$co2Kg = round(250 * (1 - ($score / 100)), 1);
+	}
+@endphp
+
 <div class="container marketing">
 	
 @if(session('error'))
@@ -38,20 +68,7 @@
 						<div class="product-general-brand">
 							<h4>{{ $product->marca }}</h4>
 						</div>
-						@if(isset($qr->end) && $qr->end == 1)
-							@php
-								// Get the score from your data
-								$score = rand(0,100); // Replace 62 with your actual score from $qr
-
-								// Determine the color class based on the score
-								if ($score < 40) {
-									$colorClass = 'bg-danger'; // red
-								} elseif ($score < 60) {
-									$colorClass = 'bg-warning'; // yellow/orange
-								} else {
-									$colorClass = 'bg-success'; // green
-								}
-							@endphp
+						@if($completedJourney)
 							<div class="product-punctuation-div">
 								<div class="product-punctuation d-flex align-items-center">
 									<span class="circle {{ $colorClass }}"></span>
@@ -65,12 +82,26 @@
 					</div>
 				</div>
 				<hr style="width: 50%; margin-left:25%;">
-				@if(isset($qr->end) && $qr->end == 1)
+				@if($completedJourney)
 				<div class="product-impact">
 					<div class="product-impact-title">
 						<h3>Product Impact</h3>
 					</div>
 					<div class="product-impact-info">
+						<div class="product-impact-gauge-wrapper">
+							<canvas
+								id="productImpactGaugeCanvas"
+								class="product-impact-gauge-canvas"
+								width="260"
+								height="140"
+								data-score="{{ $score }}"
+								data-color="{{ $scoreHex }}"
+							></canvas>
+							<div class="product-impact-score-label" style="color: {{ $scoreHex }};">
+								<span>Impact Score</span>
+								<strong>{{ $score }}/100</strong>
+							</div>
+						</div>
 						<div class="product-impact-distance">
 							<div class="product-impact-distance-img">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 fill-primary">
@@ -83,7 +114,7 @@
 								</div>
 								<div class="product-impact-distance-info">
 
-									{{2000 * (1 - ($score / 100))}} km
+									{{ number_format($distanceKm) }} km
 								</div>
 							</div>
 						</div>
@@ -98,7 +129,7 @@
 									C02 Emisions
 								</div>
 								<div class="product-impact-co2-info">
-								{{(250 * (1 - ($score / 100)))}} kg
+								{{ $co2Kg }} kg
 								</div>
 							</div>
 						</div>
@@ -266,4 +297,66 @@
 		<button id="cancelButton">Cancel</button>
 	</div>
 </div>
+
+@if($completedJourney)
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const canvas = document.getElementById('productImpactGaugeCanvas');
+			if (!canvas || !canvas.getContext) {
+				return;
+			}
+
+			const score = Number(canvas.dataset.score || 0);
+			const pointerColor = canvas.dataset.color || '#16a34a';
+			const ctx = canvas.getContext('2d');
+			const width = canvas.width;
+			const height = canvas.height;
+			const centerX = width / 2;
+			const centerY = height - 10;
+			const radius = Math.min(centerX, height) - 20;
+			const segments = [
+				{ ratio: 0.4, color: '#dc2626' },
+				{ ratio: 0.3, color: '#f59e0b' },
+				{ ratio: 0.3, color: '#16a34a' }
+			];
+
+			ctx.clearRect(0, 0, width, height);
+			let currentAngle = Math.PI; // start at 180° for left-most point
+			segments.forEach(segment => {
+				ctx.beginPath();
+				ctx.strokeStyle = segment.color;
+				ctx.lineWidth = 18;
+				ctx.lineCap = 'round';
+				const sweep = Math.PI * segment.ratio;
+				ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sweep, false);
+				ctx.stroke();
+				currentAngle += sweep;
+			});
+
+			const clampedScore = Math.min(Math.max(score, 0), 100);
+			const pointerAngle = Math.PI + (Math.PI * (clampedScore / 100));
+			const pointerLength = radius - 10;
+			const pointerX = centerX + pointerLength * Math.cos(pointerAngle);
+			const pointerY = centerY + pointerLength * Math.sin(pointerAngle);
+
+			ctx.beginPath();
+			ctx.strokeStyle = pointerColor;
+			ctx.lineWidth = 4;
+			ctx.moveTo(centerX, centerY);
+			ctx.lineTo(pointerX, pointerY);
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.fillStyle = pointerColor;
+			ctx.arc(pointerX, pointerY, 5, 0, Math.PI * 2);
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.fillStyle = '#0f172a';
+			ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
+			ctx.fill();
+		});
+	</script>
+@endif
+
 @endsection
