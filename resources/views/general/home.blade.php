@@ -15,7 +15,7 @@
 
 @include('popups.errorPopup')
 
-<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 1.png') }}" style="max-width: 1000px;" data-aos="fade-down">
+<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 1.png') }}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-down">
 
 <div class="container marketing justify-content-center align-items-center">
     <div class="row justify-content-center align-items-centerr" data-aos="zoom-in" data-aos-delay="500">
@@ -44,9 +44,9 @@
     </div>
 </div>
 
-<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 2.png') }}" style="max-width: 1000px;" data-aos="fade-up" data-aos-delay="100">
-<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 3.png') }}" style="max-width: 800px;" data-aos="fade-up" data-aos-delay="400">
-<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 4.png') }}" style="max-width: 800px;" data-aos="fade-left" data-aos-delay="800">
-<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 5.png') }}" style="max-width: 800px;" data-aos="fade-right" data-aos-delay="200">
+<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 2.png') }}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-up" data-aos-delay="100">
+<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 3.png') }}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-up" data-aos-delay="400">
+<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 4.png') }}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-left" data-aos-delay="800">
+<img class="text-center mx-auto d-block img-fluid" src="{{ URL::asset('/images/particular 5.png') }}" style="width:100%;max-width: 1000px;margin:auto;display:block;" data-aos="fade-right" data-aos-delay="200">
 
 @endsection

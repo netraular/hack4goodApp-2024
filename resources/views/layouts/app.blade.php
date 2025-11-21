@@ -58,10 +58,10 @@
                                 <a class="nav-link active" href="/empresas">Empresas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/viewqr?id=3">Ejemplo 1</a>
+                                <a class="nav-link active" href="/viewqr?id=4">Ejemplo 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/viewqr?id=1">Ejemplo 2</a>
+                                <a class="nav-link active" href="/viewqr?id=2">Ejemplo 2</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="/hack4good">Hack4Good</a>

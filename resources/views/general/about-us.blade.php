@@ -16,9 +16,9 @@
                 <p>I'm a full stack web developer with 4+ years of experience.</p>
               </div>
             </div>
-            <a href="https://github.com/netraular" class="social-icon"><i class="fa-brands fa-github"></i></a>
+            <a href="https://raular.com" class="social-icon"><i class="fa-brands fa-github"></i></a>
             <div class="card-content-wrapper">
-              <a href="https://github.com/netraular" class="card-content">
+              <a href="https://raular.com" class="card-content">
                 <h3>Raul Aquilue</h3>
                 <p>SysAdmin and main programmer of the website</p>
                 <div>
